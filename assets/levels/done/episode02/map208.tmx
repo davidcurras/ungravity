@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32">
+  <image source="tileset.png" width="160" height="448"/>
+ </tileset>
+ <layer name="background" width="20" height="15">
+  <data>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
+   <tile gid="21"/>
+   <tile gid="14"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="15"/>
+   <tile gid="14"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="15"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="14"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="28"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="26"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="15"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="54"/>
+   <tile gid="55"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="54"/>
+   <tile gid="55"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="59"/>
+   <tile gid="60"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="59"/>
+   <tile gid="60"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="70"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="19"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="20"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="26"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="28"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="26"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="28"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="65"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="65"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="70"/>
+   <tile gid="21"/>
+   <tile gid="23"/>
+   <tile gid="21"/>
+   <tile gid="19"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="20"/>
+   <tile gid="19"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="20"/>
+   <tile gid="23"/>
+   <tile gid="26"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="28"/>
+  </data>
+ </layer>
+ <layer name="controlpanel" width="25" height="15">
+  <data>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="16"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="17"/>
+   <tile gid="18"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="21"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="22"/>
+   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="26"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="27"/>
+   <tile gid="28"/>
+  </data>
+ </layer>
+ <objectgroup name="objects" width="20" height="15">
+  <object name="wall001" x="0" y="0" width="592" height="48">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall002" x="592" y="0" width="48" height="432">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall003" x="48" y="432" width="592" height="48">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall004" x="0" y="48" width="48" height="432">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall005" x="304" y="48" width="32" height="384">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall006" x="528" y="112" width="32" height="224">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall007" x="80" y="112" width="32" height="224">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall008" x="112" y="112" width="160" height="32">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall009" x="112" y="304" width="160" height="32">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall010" x="368" y="112" width="160" height="32">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="wall011" x="368" y="304" width="160" height="32">
+   <properties>
+    <property name="objClass" value="wall"/>
+   </properties>
+  </object>
+  <object name="star001" x="552" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star002" x="488" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star003" x="424" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star004" x="360" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star005" x="392" y="168" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star006" x="392" y="200" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star007" x="392" y="232" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star008" x="392" y="264" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star009" x="552" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star010" x="520" y="360" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star011" x="488" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star012" x="456" y="360" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star013" x="424" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star014" x="392" y="360" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star015" x="360" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star016" x="264" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star017" x="232" y="360" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star018" x="200" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star019" x="168" y="360" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star020" x="136" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star021" x="104" y="360" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star022" x="72" y="392" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star023" x="232" y="264" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star024" x="232" y="232" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star025" x="232" y="200" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star026" x="232" y="168" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star027" x="72" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star028" x="136" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star029" x="200" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="star030" x="264" y="72" width="16" height="16">
+   <properties>
+    <property name="objClass" value="star"/>
+   </properties>
+  </object>
+  <object name="goal001" x="152" y="216" width="16" height="16">
+   <properties>
+    <property name="objClass" value="goal"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goal002" x="472" y="216" width="16" height="16">
+   <properties>
+    <property name="objClass" value="goal"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball001" x="482" y="162" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball003" x="418" y="162" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball009" x="130" y="162" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball011" x="194" y="162" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball001" x="514" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball003" x="386" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball004" x="226" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball006" x="98" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

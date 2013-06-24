@@ -1,0 +1,3 @@
+cd "C:\Program Files (x86)\Google\Chrome\Application\" && chrome.exe --allow-file-access-from-files
+cd "C:\limejs\" && python bin/lime.py build ungravity -o ungravity/compiled/ug.js
+cd "C:\limejs\" && python bin/lime.py gensoy ungravity/assets/sprite.json
