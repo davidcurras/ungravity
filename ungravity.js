@@ -136,9 +136,17 @@ ungravity.settings = {
  * @param  {String} text The text to log
  * @return {undefined} Nothing returned
  */
-ungravity.log = function(text){
-    if((typeof console !== 'undefined') && (typeof console.log === 'function')){
-        console.log(text);
+ungravity.log = function(text, type){
+    if(typeof console !== 'undefined'){
+        if(type == 'dir' && (typeof console.dir === 'function')){
+            console.dir(text);
+        } else if(type == 'err' && (typeof console.err === 'function')){
+            console.err(text);
+        } else if(type == 'warn' && (typeof console.warn === 'function')){
+            console.warn(text);
+        } else if(typeof console.log === 'function'){
+            console.log(text);
+        }
     }
 };
 
