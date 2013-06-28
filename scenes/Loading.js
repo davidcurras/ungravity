@@ -15,7 +15,10 @@ goog.require('lime.ASSETS.ball.json');
 goog.require('lime.ASSETS.controls.json');
 goog.require('lime.ASSETS.star.json');
 goog.require('lime.audio.Audio');
-goog.require('ungravity.scenes.Presentation');
+goog.require('ungravity.entities.Ball');
+goog.require('ungravity.entities.Goal');
+goog.require('ungravity.entities.Star');
+goog.require('ungravity.entities.Wall');
 
 /**
  * Constructor
@@ -191,6 +194,10 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
         ++ungravity.Assets.Loaded;
         if(ungravity.Assets.Loaded >= ungravity.Assets.Total) {
             this.label.setText('Loading... 100%');
+            ungravity.entities.Ball.sound = ungravity.Assets.Sounds['assets/sounds/ballCollision'];
+            ungravity.entities.Goal.sound = ungravity.Assets.Sounds['assets/sounds/win'];
+            ungravity.entities.Star.sound = ungravity.Assets.Sounds['assets/sounds/star'];
+            ungravity.entities.Wall.sound = ungravity.Assets.Sounds['assets/sounds/wallBounce'];
             ungravity.director.replaceScene(new ungravity.scenes.Presentation());
         } else {
             this.label.setText('Loading... '+Math.floor(ungravity.Assets.Loaded*100/ungravity.Assets.Total)+'%');
