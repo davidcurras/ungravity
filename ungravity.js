@@ -43,9 +43,10 @@ ungravity.Assets = {
         'assets/sprites/star': null
     },
     'Sounds':{
-        'assets/sounds/bounce': null,
+        'assets/sounds/ballCollision': null,
         'assets/sounds/star': null,
-        'assets/sounds/start': null,
+        'assets/sounds/presentation': null,
+        'assets/sounds/wallBounce': null,
         'assets/sounds/win': null
     },
     'Total':0,
