@@ -10,7 +10,7 @@ goog.require('lime.animation.ScaleBy');
 goog.require('lime.animation.FadeTo');
 goog.require('lime.animation.Delay');
 goog.require('lime.transitions.Dissolve');
-goog.require('ungravity.scenes.Loading');
+goog.require('ungravity.scenes.Menu');
 
 /**
  * Constructor
@@ -61,6 +61,6 @@ goog.object.extend(ungravity.scenes.Presentation.prototype, {
      * @return {undefined} Nothing returned
      */
     animationEndHandler: function(){
-        ungravity.director.replaceScene(new ungravity.scenes.Loading(), lime.transitions.Dissolve);
+        ungravity.director.replaceScene(new ungravity.scenes.Menu(), lime.transitions.Dissolve);
     }
 });
