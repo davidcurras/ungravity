@@ -34,7 +34,7 @@ ungravity.scenes.Loading = function() {
             try {
                 this.loadAsset(assetKey, typeKey);
             } catch (e) {
-                ungravity.log(e);
+                ungravity.log('scenes.Loading at line 37:\t\t'+e.message, 'err');
                 this.checkLoadedAssets();
             }
         }
@@ -125,7 +125,6 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
                     that.checkLoadedAssets();
                 };
                 hasCallbackFn = true;
-                type = 'IMAGE';
                 break;
             case 'MAPS':
             case 'MAP':
@@ -141,20 +140,20 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
                 callbackFn = function () {
                     if(type.toUpperCase() == 'MAPS' || type.toUpperCase() == 'MAP'){
                         ungravity.Assets.Maps[src] = new lime.parser.TMX(src);
+                    } else if(type.toUpperCase() == 'SPRITESHEETSCRIPT'){
+                        var objKey = src.substr(0, src.indexOf('.'));
+                        var ssName = objKey.substr(objKey.lastIndexOf('/')+1);
+                        ungravity.Assets.SpriteSheets[objKey] = new lime.SpriteSheet(objKey+'.png', lime.ASSETS[ssName].json, lime.parser.JSON);
                     }
                     that.checkLoadedAssets();
                 };
                 hasCallbackFn = true;
-                type = 'SCRIPT';
                 break;
             case 'SPRITESHEETS':
             case 'SPRITESHEET':
                 this.loadAsset(src+'.json.js', 'spritesheetscript');
                 this.loadAsset(src+'.png', 'spritesheetimage');
-                var ssName = src.substr(src.lastIndexOf('/')+1);
-                ungravity.Assets.SpriteSheets[src] = new lime.SpriteSheet(src+'.png', lime.ASSETS[ssName].json, lime.parser.JSON);
                 hasCallbackFn = false;
-                type = 'SPRITESHEET';
                 break;
             case 'SOUNDS':
             case 'SOUND':
@@ -170,7 +169,6 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
                     that.checkLoadedAssets();
                 };
                 hasCallbackFn = true;
-                type = 'SOUND';
                 break;
             default:
                 throw 'Unable to load "'+src+'" of type '+type;
@@ -178,9 +176,9 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
         if(hasCallbackFn){
             newObj.onload = callbackFn;
         }
-        if(type.toUpperCase() == 'IMAGE'){
+        if(type.toUpperCase() == 'IMAGE' || type.toUpperCase() == 'IMAGES' || type.toUpperCase() == 'SPRITESHEETIMAGE'){
             newObj.src = src;
-        } else if(type.toUpperCase() == 'MAP' || type.toUpperCase() == 'SCRIPT' || type.toUpperCase() == 'SOUND'){
+        } else if(type.toUpperCase() != 'SPRITESHEETS' && type.toUpperCase() != 'SPRITESHEET'){
             newObj.send();
         }
     },
@@ -193,7 +191,7 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
         ++ungravity.Assets.Loaded;
         if(ungravity.Assets.Loaded >= ungravity.Assets.Total) {
             this.label.setText('Loading... 100%');
-            //ungravity.director.replaceScene(new ungravity.scenes.Presentation());
+            ungravity.director.replaceScene(new ungravity.scenes.Presentation());
         } else {
             this.label.setText('Loading... '+Math.floor(ungravity.Assets.Loaded*100/ungravity.Assets.Total)+'%');
         }
