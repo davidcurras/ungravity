@@ -10,6 +10,7 @@ goog.require('lime.animation.ScaleBy');
 goog.require('lime.animation.FadeTo');
 goog.require('lime.animation.Delay');
 goog.require('lime.transitions.Dissolve');
+goog.require('lime.audio.Audio');
 goog.require('ungravity.scenes.Menu');
 
 /**
@@ -20,12 +21,13 @@ ungravity.scenes.Presentation = function() {
     goog.base(this);
     this.layer = new lime.Layer();
     var logo = new lime.Sprite()
-        .setFill('assets/texts/ungravity.png')
+        .setFill(ungravity.Assets.Images['assets/texts/ungravity.png'])
         .setRotation(10)
         .setPosition(ungravity.settings.width/2, ungravity.settings.height/2)
         .setSize(35, 10)
         .setOpacity(0);
     var anim = this.animate(logo);
+    ungravity.Assets.Sounds['assets/sounds/presentation'].play();
     this.appendChild(this.layer);
     goog.events.listen(anim, lime.animation.Event.STOP, this.animationEndHandler);
 };

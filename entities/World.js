@@ -22,7 +22,7 @@ goog.require('ungravity.entities.BadBall');
 ungravity.entities.World = function(levelName, scene) {
     this.container = scene;
     this.setLevelAndEpisode(levelName);
-    this.tmx = new lime.parser.TMX('assets/maps/map'+levelName+'.tmx');
+    this.tmx = ungravity.Assets.Maps['assets/maps/map'+levelName+'.tmx'];
     this.gravity = new box2d.Vec2(0.0, 9.81);
     this.b2dObject = new box2d.World(this.gravity, ungravity.settings.allowSleep);
     this.b2dObject.SetWarmStarting(ungravity.settings.warmStarting);
@@ -301,9 +301,13 @@ goog.object.extend(ungravity.entities.World.prototype, {
         var timeStep = dt/1000;
         var velocityLoops = parseInt(300 * timeStep); //velocity Iterations Per Second
         var positionLoops = parseInt(200 * timeStep); //position Iterations Per Second
-        this.b2dObject.ClearForces();
-        this.b2dObject.Step(timeStep, velocityLoops, positionLoops);
-        this.render();
+        try {
+            this.b2dObject.ClearForces();
+            this.b2dObject.Step(timeStep, velocityLoops, positionLoops);
+            this.render();
+        } catch (e) {
+            ungravity.log('entities.World at line 309:\t\t'+e.message, 'err');
+        }
     },
 
     /**

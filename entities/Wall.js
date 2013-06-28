@@ -34,5 +34,5 @@ ungravity.entities.Wall = function(tmxObj, world) {
 goog.inherits(ungravity.entities.Wall, ungravity.entities.Entity);
 
 //goog.object.extend(ungravity.entities.Wall.prototype, { });
-//
-ungravity.entities.Wall.sound = new lime.audio.Audio('assets/sounds/bounce2.'+ungravity.settings.audioFileExtension);
+
+ungravity.entities.Wall.sound = undefined;

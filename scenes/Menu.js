@@ -20,9 +20,9 @@ ungravity.scenes.Menu = function() {
     goog.base(this);    
     this.layer = new lime.Layer();
     var menuOptions = [
-        {img:'assets/texts/play.png', sprite:undefined, width:139, height:69, scene:ungravity.scenes.Episodes},
-        {img:'assets/texts/options.png', sprite:undefined, width:211, height:69, scene:ungravity.scenes.Options},
-        {img:'assets/texts/credits.png', sprite:undefined, width:209, height:69, scene:ungravity.scenes.Credits}
+        {textImageName:'play', sprite:undefined, width:139, height:69, scene:ungravity.scenes.Episodes},
+        {textImageName:'options', sprite:undefined, width:211, height:69, scene:ungravity.scenes.Options},
+        {textImageName:'credits', sprite:undefined, width:209, height:69, scene:ungravity.scenes.Credits}
     ];
     this.createOptions(menuOptions);
     this.appendChild(this.layer);
@@ -60,7 +60,8 @@ goog.object.extend(ungravity.scenes.Menu.prototype, {
             var option = menuOptions[i];
             var xPos = ungravity.settings.width/2; 
             var yPos = i * (lblHeight + lblMargin);
-            var sprite = new lime.Sprite().setFill(option.img)
+            var sprite = new lime.Sprite()
+                .setFill(ungravity.Assets.Images['assets/texts/'+option.textImageName+'.png'])
                 .setRotation(0)
                 .setPosition(xPos, yPos+(lblHeight/2)+lblMargin)
                 .setSize(option.width, option.height)

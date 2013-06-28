@@ -18,7 +18,7 @@ goog.require('ungravity.entities.Entity');
 ungravity.entities.Ball = function(tmxObj, world, color) {
     goog.base(this);
     this.objClass = 'ball';
-    this.spriteSheet = new lime.SpriteSheet('assets/sprites/ball.png', lime.ASSETS.ball.json, lime.parser.JSON);
+    this.spriteSheet = ungravity.Assets.SpriteSheets['assets/sprites/ball'];
     var px = tmxObj.px + (tmxObj.width/2);
     var py = tmxObj.py + (tmxObj.height/2);
     var mult = ungravity.settings.b2dMultiplier;
@@ -76,4 +76,4 @@ goog.object.extend(ungravity.entities.Ball.prototype, {
     }
 });
 
-ungravity.entities.Ball.sound = new lime.audio.Audio('assets/sounds/bounce.'+ungravity.settings.audioFileExtension);
+ungravity.entities.Ball.sound = undefined;

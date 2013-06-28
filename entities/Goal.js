@@ -36,4 +36,4 @@ goog.inherits(ungravity.entities.Goal, ungravity.entities.Entity);
 
 //goog.object.extend(ungravity.entities.Goal.prototype, { });
 //
-ungravity.entities.Goal.sound = new lime.audio.Audio('assets/sounds/win.'+ungravity.settings.audioFileExtension);
+ungravity.entities.Goal.sound = undefined;

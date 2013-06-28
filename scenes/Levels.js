@@ -80,7 +80,7 @@ goog.object.extend(ungravity.scenes.Levels.prototype, {
             var xPos = (ungravity.settings.width/2) - (sptWidth+sptMargin)*levelsPerRow/2 + (i%levelsPerRow)*(sptWidth+sptMargin);
             var yPos = (ungravity.settings.height/2) - (sptHeight+sptMargin)*rows/2 + Math.floor(i/rows)*(sptHeight+sptMargin);
             var levelSprite = new lime.Sprite()
-                .setFill('assets/thumbnails/level'+level.name+'.png')
+                .setFill(ungravity.Assets.Images['assets/thumbnails/level'+level.name+'.png'])
                 .setRotation(0)
                 .setPosition(xPos+(sptWidth/2), yPos+(sptHeight/2))
                 .setSize(sptWidth, sptHeight)

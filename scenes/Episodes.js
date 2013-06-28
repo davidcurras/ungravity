@@ -52,7 +52,7 @@ goog.object.extend(ungravity.scenes.Episodes.prototype, {
             var xPos = (ungravity.settings.width/2) - (sptWidth+sptMargin)*episodes.length/2 + i*(sptWidth+sptMargin);
             var yPos = ungravity.settings.height/2;
             var episodeSprite = new lime.Sprite()
-                .setFill('assets/thumbnails/episode'+episode.name+'.png')
+                .setFill(ungravity.Assets.Images['assets/thumbnails/episode'+episode.name+'.png'])
                 .setRotation(0)
                 .setPosition(xPos+(sptWidth/2), yPos)
                 .setSize(sptWidth, sptHeight)

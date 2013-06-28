@@ -18,7 +18,7 @@ goog.require('ungravity.entities.Entity');
 ungravity.entities.Star = function(tmxObj, world) {
     goog.base(this);
     this.objClass = 'star';
-    this.spriteSheet = new lime.SpriteSheet('assets/sprites/star.png', lime.ASSETS.star.json, lime.parser.JSON);
+    this.spriteSheet = ungravity.Assets.SpriteSheets['assets/sprites/star'];
     var px = tmxObj.px + (tmxObj.width/2);
     var py = tmxObj.py + (tmxObj.height/2);
     var mult = ungravity.settings.b2dMultiplier;
@@ -94,4 +94,4 @@ goog.object.extend(ungravity.entities.Star.prototype, {
 
 });
 
-ungravity.entities.Star.sound = new lime.audio.Audio('assets/sounds/star2.'+ungravity.settings.audioFileExtension);
+ungravity.entities.Star.sound = undefined;

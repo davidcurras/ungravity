@@ -94,7 +94,7 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.totalPointsLabel = new lime.Label()
             .setText('Total: 0')
             .setPosition(40, 150);
-        this.controlSS = new lime.SpriteSheet('assets/sprites/controls.png', lime.ASSETS.controls.json, lime.parser.JSON);
+        this.controlSS = ungravity.Assets.SpriteSheets['assets/sprites/controls'];
         this.gravitySpt = new lime.Sprite()
             .setFill(this.controlSS.getFrame('brown-down.png'))
             .setSize(32,32)

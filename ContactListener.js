@@ -26,16 +26,22 @@ goog.object.extend(ungravity.ContactListener.prototype, {
         var objB = ungravity.World.objects[keyB];
         if(typeof objA !== 'undefined' && typeof objB !== 'undefined'){
             if(objA.objClass == 'star' && objB.objClass == 'goodball'){
-                ungravity.entities.Star.sound.play();
+                if(typeof ungravity.entities.Star.sound !== 'undefined'){
+                    ungravity.entities.Star.sound.play();
+                }
                 objA.die();
                 delete ungravity.World.objects[keyA];
             } else if(objB.objClass == 'star' && objA.objClass == 'goodball'){
-                ungravity.entities.Star.sound.play();
+                if(typeof ungravity.entities.Star.sound !== 'undefined'){
+                    ungravity.entities.Star.sound.play();
+                }
                 objB.die();
                 delete ungravity.World.objects[keyB];
             }
             if((objA.objClass == 'goal' && objB.objClass == 'goodball') || (objB.objClass == 'goal' && objA.objClass == 'goodball')){
-                ungravity.entities.Goal.sound.play();
+                if(typeof ungravity.entities.Goal.sound !== 'undefined'){
+                    ungravity.entities.Goal.sound.play();
+                }
                 var levelName = ungravity.Player.levelName;
                 ungravity.Player.gamePoints[levelName] = ungravity.Player.stars * 10;
                 var nextLevel = ungravity.World.getNextLevelName();
@@ -44,22 +50,24 @@ goog.object.extend(ungravity.ContactListener.prototype, {
             if((objA.objClass == 'badball' && objB.objClass == 'goodball') || (objB.objClass == 'badball' && objA.objClass == 'goodball') ||
                 (objA.objClass == 'badball' && objB.objClass == 'badball') || (objB.objClass == 'badball' && objA.objClass == 'badball') ||
                 (objA.objClass == 'goodball' && objB.objClass == 'goodball') || (objB.objClass == 'goodball' && objA.objClass == 'goodball')){
-                ungravity.entities.Ball.sound.play();
+                if(typeof ungravity.entities.Ball.sound !== 'undefined'){
+                    ungravity.entities.Ball.sound.play();
+                }
             }
             if((objA.objClass == 'wall' && objB.objClass == 'goodball') || (objB.objClass == 'wall' && objA.objClass == 'goodball')){
                 var vA = ungravity.World.objects[keyA].b2dObject.m_linearVelocity;
                 var vB = ungravity.World.objects[keyB].b2dObject.m_linearVelocity;
                 var vMax = Math.max((vA.x+vA.y), (vB.x+vB.y));
-                var volume = 1;
-                if(vMax < 20){
-                    volume = 1 - (1/vMax);
+                if(typeof ungravity.entities.Wall.sound !== 'undefined'){
+                    /* Volume controls feature commented because doesn't work as expected
+                    var volume = 1;
+                    if(vMax < 20) volume = 1 - (1/vMax);
+                    if(volume < 0) volume = 0;
+                    console.log(''+ungravity.entities.Wall.sound.getVolume()+' --> '+volume);
+                    ungravity.entities.Wall.sound.setVolume(volume);
+                    */
+                    ungravity.entities.Wall.sound.play();
                 }
-                if(volume < 0){
-                    volume = 0;
-                }
-                console.log(''+ungravity.entities.Wall.sound.getVolume()+' --> '+volume);
-                ungravity.entities.Wall.sound.setVolume(volume);
-                ungravity.entities.Wall.sound.play();
             }
         } else {
             //ungravity.log('ContactListener: Objects not found in the World.objects stack. ObjA: '+keyA+' ObjB'+keyB);
