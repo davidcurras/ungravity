@@ -5,33 +5,7 @@ goog.provide('ungravity');
 goog.require('lime');
 goog.require('lime.Director');
 goog.require('ungravity.entities.Player');
-goog.require('ungravity.scenes.Presentation');
-
-/** 
- * The application entry point
- * @return {undefined} Nothing returned
- */
-ungravity.start = function(){
-    ungravity.director = new lime.Director(document.body, ungravity.settings.width, ungravity.settings.height);
-    ungravity.Player = new ungravity.entities.Player();
-    ungravity.director.makeMobileWebAppCapable();
-    ungravity.director.setDisplayFPS(true);
-    ungravity.director.replaceScene(new ungravity.scenes.Presentation());
-    if (goog.userAgent.GECKO){
-        ungravity.settings.audioFileExtension = 'ogg';
-    }
-};
-
-/**
- * A wrapper for console.log function
- * @param  {String} text The text to log
- * @return {undefined} Nothing returned
- */
-ungravity.log = function(text){
-    if((typeof console !== 'undefined') && (typeof console.log === 'function')){
-        console.log(text);
-    }
-};
+goog.require('ungravity.scenes.Loading');
 
 /**
  * The world object
@@ -44,6 +18,39 @@ ungravity.World = undefined;
  * @type {ungravity.entities.Player}
  */
 ungravity.Player = undefined;
+
+/**
+ * The asset list to download
+ * @type {Object}
+ */
+ungravity.Assets = {
+    'Images':{
+        'assets/maps/tileset.png': null,
+        'assets/sprites/goal.png': null,
+        'assets/texts/credits.png': null,
+        'assets/texts/dcg.png': null,
+        'assets/texts/options.png': null,
+        'assets/texts/play.png': null,
+        'assets/texts/ungravity.png': null
+        //Thumbnails will be added to this list in Loading Scene
+    },
+    'Maps':{
+        //Maps will be added to this list in Loading Scene
+    },
+    'SpriteSheets':{
+        'assets/sprites/ball': null,
+        'assets/sprites/controls': null,
+        'assets/sprites/star': null
+    },
+    'Sounds':{
+        'assets/sounds/bounce': null,
+        'assets/sounds/star': null,
+        'assets/sounds/start': null,
+        'assets/sounds/win': null
+    },
+    'Total':0,
+    'Loaded':0
+};
 
 /**
  * Initial game setting
@@ -122,6 +129,32 @@ ungravity.settings = {
      * @type {Number}
      */
     cpWidth: 160
+};
+
+/**
+ * A wrapper for console.log function
+ * @param  {String} text The text to log
+ * @return {undefined} Nothing returned
+ */
+ungravity.log = function(text){
+    if((typeof console !== 'undefined') && (typeof console.log === 'function')){
+        console.log(text);
+    }
+};
+
+/** 
+ * The application entry point
+ * @return {undefined} Nothing returned
+ */
+ungravity.start = function(){
+    ungravity.director = new lime.Director(document.body, ungravity.settings.width, ungravity.settings.height);
+    ungravity.Player = new ungravity.entities.Player();
+    ungravity.director.makeMobileWebAppCapable();
+    ungravity.director.setDisplayFPS(true);
+    if (goog.userAgent.GECKO){
+        ungravity.settings.audioFileExtension = 'ogg';
+    }
+    ungravity.director.replaceScene(new ungravity.scenes.Loading());
 };
 
 //this is required for outside access after code is compiled in ADVANCED_COMPILATIONS mode

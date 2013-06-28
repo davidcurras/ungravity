@@ -1,12 +1,21 @@
 goog.provide('ungravity.scenes.Loading');
 
-goog.require('goog.net.ImageLoader');
 goog.require('lime');
+goog.require('lime.Director');
 goog.require('lime.Scene');
 goog.require('lime.Layer');
 goog.require('lime.Label');
-goog.require('lime.transitions.Dissolve');
-goog.require('ungravity.scenes.Menu');
+goog.require('lime.SpriteSheet');
+goog.require('lime.parser.JSON');
+goog.require('lime.parser.TMX');
+goog.require('lime.animation.KeyframeAnimation');
+goog.require('lime.fill.Frame');
+goog.require('lime.fill.Image');
+goog.require('lime.ASSETS.ball.json');
+goog.require('lime.ASSETS.controls.json');
+goog.require('lime.ASSETS.star.json');
+goog.require('lime.audio.Audio');
+goog.require('ungravity.scenes.Presentation');
 
 /**
  * Constructor
@@ -18,38 +27,18 @@ ungravity.scenes.Loading = function() {
     this.createLabel();
     this.appendChild(this.layer);
     var i = 0;
-    this.images = [
-        'assets/maps/tileset.png',
-        'assets/sprites/ball.png',
-        'assets/sprites/star.png',
-        'assets/texts/credits.png',
-        'assets/texts/options.png',
-        'assets/texts/play.png',
-        'assets/texts/ungravity.png'
-    ];
-    for (var i = 1; i <= ungravity.settings.episodes; i++) {
-        for (var j = 1; j <= ungravity.settings.levelsPerEpisode; j++) {
-            var levelName = ''+i;
-            if(j < 10){
-                levelName += '0';
+    this.fillAssetList();
+    for (var typeKey in ungravity.Assets) {
+        for (var assetKey in ungravity.Assets[typeKey]) {
+            var asset = ungravity.Assets[typeKey][assetKey];
+            try {
+                this.loadAsset(assetKey, typeKey);
+            } catch (e) {
+                ungravity.log(e);
+                this.checkLoadedAssets();
             }
-            levelName += j;
-            this.images.push('assets/thumbnails/level'+levelName+'.png');
         }
-        this.images.push('assets/thumbnails/episode'+i+'.png');
-    };
-    var imageLoader = new goog.net.ImageLoader();
-    var that = this;
-    goog.events.listen(imageLoader, goog.events.EventType.LOAD, function(e) { that.count++; });
-    goog.events.listen(imageLoader, goog.net.EventType.COMPLETE, function(e) { 
-        ungravity.director.replaceScene(new ungravity.scenes.Menu(), lime.transitions.Dissolve);
-    });
-    for (var i in this.images) {
-        imageLoader.addImage(this.images[i], this.images[i]);
-    };
-    imageLoader.start();
-
-    lime.scheduleManager.schedule(this.checkLoadedImages, this);
+    }
 };
 
 goog.inherits(ungravity.scenes.Loading, lime.Scene);
@@ -67,12 +56,6 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
      * @type {lime.Label}
      */
     label: undefined,
-
-    /**
-     * The images path to upload
-     * @type {Array}
-     */
-    images: [],
 
     /**
      * The already loaded images
@@ -96,12 +79,123 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
     },
 
     /**
-     * 
-     * Creates the label for Loading status
-     * @param  {Number} dt The scheduler elapsed time
+     * Adds thumbnails and maps to the assets list
      * @return {undefined} Nothing returned
      */
-    checkLoadedImages: function(dt) {
-        this.label.setText('Loading... '+Math.floor(this.count*100/this.images.length)+'%');
+    fillAssetList: function() {
+        for (var i = 1; i <= ungravity.settings.episodes; i++) {
+            for (var j = 1; j <= ungravity.settings.levelsPerEpisode; j++) {
+                var levelName = ''+i;
+                if(j < 10){
+                    levelName += '0';
+                }
+                levelName += j;
+                ungravity.Assets.Maps['assets/maps/map'+levelName+'.tmx'] = null;
+                ungravity.Assets.Images['assets/thumbnails/level'+levelName+'.png'] = null;
+            }
+            ungravity.Assets.Images['assets/thumbnails/episode'+i+'.png'] = null;
+        }
+        ungravity.Assets.Total += Object.keys(ungravity.Assets.Images).length;
+        ungravity.Assets.Total += Object.keys(ungravity.Assets.Maps).length;
+        ungravity.Assets.Total += Object.keys(ungravity.Assets.SpriteSheets).length * 2;
+        ungravity.Assets.Total += Object.keys(ungravity.Assets.Sounds).length;
+    },
+
+    /**
+     * Downloads the asset file and creates/stores the object if needed
+     * @param  {String} asset The assets src
+     * @param  {String} type  The asset type
+     * @return {undefined} Nothing returned
+     */
+    loadAsset: function(src, type){
+        var newObj = null;
+        var callbackFn = null;
+        var hasCallbackFn = false;
+        var that = this;
+        switch(type.toUpperCase()){
+            case 'IMAGES':
+            case 'IMAGE':
+            case 'SPRITESHEETIMAGE':
+                newObj = new Image();
+                callbackFn = function () {
+                    lime.fill.Image.loadedImages_[src] = newObj;
+                    if(type.toUpperCase() == 'IMAGES' || type.toUpperCase() == 'IMAGE'){
+                        ungravity.Assets.Images[src] = new lime.fill.Image(src);
+                    }
+                    that.checkLoadedAssets();
+                };
+                hasCallbackFn = true;
+                type = 'IMAGE';
+                break;
+            case 'MAPS':
+            case 'MAP':
+            case 'SPRITESHEETSCRIPT':
+            case 'SCRIPTS':
+            case 'SCRIPT':
+                if (window.XMLHttpRequest) {
+                    newObj = new XMLHttpRequest();
+                } else {
+                    newObj = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                newObj.open("GET", src, true);
+                callbackFn = function () {
+                    if(type.toUpperCase() == 'MAPS' || type.toUpperCase() == 'MAP'){
+                        ungravity.Assets.Maps[src] = new lime.parser.TMX(src);
+                    }
+                    that.checkLoadedAssets();
+                };
+                hasCallbackFn = true;
+                type = 'SCRIPT';
+                break;
+            case 'SPRITESHEETS':
+            case 'SPRITESHEET':
+                this.loadAsset(src+'.json.js', 'spritesheetscript');
+                this.loadAsset(src+'.png', 'spritesheetimage');
+                var ssName = src.substr(src.lastIndexOf('/')+1);
+                ungravity.Assets.SpriteSheets[src] = new lime.SpriteSheet(src+'.png', lime.ASSETS[ssName].json, lime.parser.JSON);
+                hasCallbackFn = false;
+                type = 'SPRITESHEET';
+                break;
+            case 'SOUNDS':
+            case 'SOUND':
+                if (window.XMLHttpRequest) {
+                    newObj = new XMLHttpRequest();
+                } else {
+                    newObj = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                newObj.open("GET", src+'.'+ungravity.settings.audioFileExtension, true);
+                newObj.responseType = 'arraybuffer';
+                callbackFn = function () {
+                    ungravity.Assets.Sounds[src] = new lime.audio.Audio(src+'.'+ungravity.settings.audioFileExtension);
+                    that.checkLoadedAssets();
+                };
+                hasCallbackFn = true;
+                type = 'SOUND';
+                break;
+            default:
+                throw 'Unable to load "'+src+'" of type '+type;
+        }
+        if(hasCallbackFn){
+            newObj.onload = callbackFn;
+        }
+        if(type.toUpperCase() == 'IMAGE'){
+            newObj.src = src;
+        } else if(type.toUpperCase() == 'MAP' || type.toUpperCase() == 'SCRIPT' || type.toUpperCase() == 'SOUND'){
+            newObj.send();
+        }
+    },
+
+    /**
+     * Replace the current scene with scenes.Presentation when all assets are loaded
+     * @return {undefined} Nothing returned
+     */
+    checkLoadedAssets: function () {
+        ++ungravity.Assets.Loaded;
+        if(ungravity.Assets.Loaded >= ungravity.Assets.Total) {
+            this.label.setText('Loading... 100%');
+            //ungravity.director.replaceScene(new ungravity.scenes.Presentation());
+        } else {
+            this.label.setText('Loading... '+Math.floor(ungravity.Assets.Loaded*100/ungravity.Assets.Total)+'%');
+        }
     }
 });
