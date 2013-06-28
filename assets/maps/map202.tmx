@@ -901,6 +901,18 @@
    </properties>
    <ellipse/>
   </object>
+  <object name="badball003" x="66" y="98" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball004" x="546" y="354" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
   <object name="goodball001" x="66" y="66" width="29" height="29">
    <properties>
     <property name="objClass" value="goodball"/>
@@ -908,6 +920,18 @@
    <ellipse/>
   </object>
   <object name="goodball002" x="546" y="386" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball003" x="514" y="354" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball004" x="98" y="98" width="29" height="29">
    <properties>
     <property name="objClass" value="goodball"/>
    </properties>

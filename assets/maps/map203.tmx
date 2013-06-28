@@ -884,15 +884,15 @@
    </properties>
    <ellipse/>
   </object>
-  <object name="badball002" x="290" y="66" width="29" height="29">
-   <properties>
-    <property name="objClass" value="badball"/>
-   </properties>
-   <ellipse/>
-  </object>
   <object name="goodball001" x="546" y="386" width="29" height="29">
    <properties>
     <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball002" x="290" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
    </properties>
    <ellipse/>
   </object>
