@@ -328,8 +328,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="16"/>
+   <tile gid="17"/>
    <tile gid="17"/>
    <tile gid="17"/>
    <tile gid="17"/>
@@ -353,8 +353,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -378,8 +378,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -403,8 +403,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -428,8 +428,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -453,8 +453,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -478,8 +478,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -503,8 +503,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -528,8 +528,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -553,8 +553,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -578,8 +578,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -603,8 +603,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -628,8 +628,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
+   <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
@@ -653,13 +653,12 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="21"/>
    <tile gid="22"/>
    <tile gid="22"/>
    <tile gid="22"/>
+   <tile gid="22"/>
    <tile gid="23"/>
-   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -680,6 +679,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="26"/>
+   <tile gid="27"/>
    <tile gid="27"/>
    <tile gid="27"/>
    <tile gid="27"/>
@@ -910,19 +910,43 @@
    </properties>
    <ellipse/>
   </object>
-  <object name="badball003" x="418" y="162" width="29" height="29">
+  <object name="badball002" x="418" y="162" width="29" height="29">
    <properties>
     <property name="objClass" value="badball"/>
    </properties>
    <ellipse/>
   </object>
-  <object name="badball009" x="130" y="162" width="29" height="29">
+  <object name="badball003" x="130" y="162" width="29" height="29">
    <properties>
     <property name="objClass" value="badball"/>
    </properties>
    <ellipse/>
   </object>
-  <object name="badball011" x="194" y="162" width="29" height="29">
+  <object name="badball004" x="194" y="162" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball005" x="418" y="258" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball006" x="482" y="258" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball007" x="194" y="258" width="29" height="29">
+   <properties>
+    <property name="objClass" value="badball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="badball008" x="130" y="258" width="29" height="29">
    <properties>
     <property name="objClass" value="badball"/>
    </properties>
@@ -934,19 +958,31 @@
    </properties>
    <ellipse/>
   </object>
-  <object name="goodball003" x="386" y="66" width="29" height="29">
+  <object name="goodball002" x="386" y="66" width="29" height="29">
    <properties>
     <property name="objClass" value="goodball"/>
    </properties>
    <ellipse/>
   </object>
-  <object name="goodball004" x="226" y="66" width="29" height="29">
+  <object name="goodball003" x="226" y="66" width="29" height="29">
    <properties>
     <property name="objClass" value="goodball"/>
    </properties>
    <ellipse/>
   </object>
-  <object name="goodball006" x="98" y="66" width="29" height="29">
+  <object name="goodball004" x="98" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball005" x="162" y="66" width="29" height="29">
+   <properties>
+    <property name="objClass" value="goodball"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="goodball006" x="450" y="66" width="29" height="29">
    <properties>
     <property name="objClass" value="goodball"/>
    </properties>
