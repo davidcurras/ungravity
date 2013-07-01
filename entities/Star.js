@@ -1,16 +1,9 @@
 goog.provide('ungravity.entities.Star');
-
-goog.require('lime.SpriteSheet');
-goog.require('lime.parser.JSON');
-goog.require('lime.animation.KeyframeAnimation');
-goog.require('lime.animation.Easing');
-goog.require('lime.fill.Frame');
-goog.require('lime.ASSETS.star.json');
-goog.require('lime.audio.Audio');
 goog.require('ungravity.entities.Entity');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {ungravity.entities.Entity}
  * @param  {Object} tmxObj The Tiled object with the Star initial settings
  * @param  {ungravity.entities.World} world The current world where create walls
  * @return {ungravity.entities.Star}
@@ -18,7 +11,7 @@ goog.require('ungravity.entities.Entity');
 ungravity.entities.Star = function(tmxObj, world) {
     goog.base(this);
     this.objClass = 'star';
-    this.spriteSheet = ungravity.Assets.SpriteSheets['assets/sprites/star'];
+    this.spriteSheet = ungravity.Assets.SpriteSheets['assets/sprites/staranim'];
     var px = tmxObj.px + (tmxObj.width/2);
     var py = tmxObj.py + (tmxObj.height/2);
     var mult = ungravity.settings.b2dMultiplier;
@@ -69,7 +62,7 @@ goog.object.extend(ungravity.entities.Star.prototype, {
      */
     die: function() {
         ungravity.Player.stars++;
-        ungravity.World.b2dObject.DestroyBody(this.b2dObject);
+        ungravity.World.dieList.push(this.b2dObject.GetUserData());
         var sprite = this.limeObject;
         var anim = new lime.animation.Spawn( 
             new lime.animation.ScaleBy(0.1).setEasing(lime.animation.Easing.EASEOUT).setDuration(1), 

@@ -1,9 +1,9 @@
 goog.provide('ungravity.entities.BadBall');
-
 goog.require('ungravity.entities.Ball');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {ungravity.entities.Ball}
  * @param  {Object} tmxObj The Tiled object with the Ball initial settings
  * @param  {ungravity.entities.World} world The current world where create the ball
  * @param  {String} color The ball color

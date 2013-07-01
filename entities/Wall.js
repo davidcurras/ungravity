@@ -1,10 +1,9 @@
 goog.provide('ungravity.entities.Wall');
-
-goog.require('lime.audio.Audio');
 goog.require('ungravity.entities.Entity');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {ungravity.entities.Entity}
  * @param  {Object} tmxObj The Tiled object with the Wall initial settings
  * @param  {ungravity.entities.World} world The current world where create walls
  * @return {ungravity.entities.Wall}

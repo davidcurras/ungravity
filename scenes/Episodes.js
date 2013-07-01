@@ -1,14 +1,9 @@
 goog.provide('ungravity.scenes.Episodes');
-
-goog.require('lime');
 goog.require('lime.Scene');
-goog.require('lime.Layer');
-goog.require('lime.Sprite');
-goog.require('lime.transitions.Dissolve');
-goog.require('ungravity.scenes.Levels');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {lime.Scene}
  * @return {ungravity.scenes.Episodes}
  */
 ungravity.scenes.Episodes = function() {
@@ -45,8 +40,18 @@ goog.object.extend(ungravity.scenes.Episodes.prototype, {
     createEpisodesGrid: function(episodes) {
         var anim = new lime.animation.FadeTo(1).setDuration(2);
         var sptWidth = 158;
-        var sptHeight = 222;
+        var sptHeight = 350;
         var sptMargin = 30;
+        var chooseLabel = new lime.Label()
+            .setText('Choose an episode')
+            .setAlign('center')
+            .setPosition(-20, 20)
+            .setSize(ungravity.settings.width,25)
+            .setAnchorPoint(0, 0)
+            .setFontFamily('Permanent Marker')
+            .setFontSize(26)
+            .setFontColor('#EEE');
+        this.layer.appendChild(chooseLabel);
         for(var i in episodes){
             var episode = episodes[i];
             var xPos = (ungravity.settings.width/2) - (sptWidth+sptMargin)*episodes.length/2 + i*(sptWidth+sptMargin);
@@ -57,10 +62,38 @@ goog.object.extend(ungravity.scenes.Episodes.prototype, {
                 .setPosition(xPos+(sptWidth/2), yPos)
                 .setSize(sptWidth, sptHeight)
                 .setOpacity(0);
+            var episodeLabel = new lime.Label()
+                .setText('Episode '+episode.name)
+                .setPosition(0, -150)
+                .setSize(sptWidth-30,25)
+                .setAnchorPoint(0.5, 0)
+                .setFontFamily('Quantico')
+                .setFontSize(16)
+                .setFontColor('#222222');
+            var hintLabel = new lime.Label()
+                .setText('Collect as many stars as you can!!!')
+                .setPosition(0, -70)
+                .setSize(sptWidth-30,50)
+                .setAnchorPoint(0.5, 0)
+                .setFontFamily('Quantico')
+                .setFontSize(16)
+                .setFontColor('#222222');
+            episodeSprite.appendChild(episodeLabel);
+            episodeSprite.appendChild(hintLabel);
             this.layer.appendChild(episodeSprite);
             anim.addTarget(episodeSprite);
             episode.sprite = episodeSprite;
         }
+        var back = new lime.Sprite()
+            .setFill(ungravity.Assets.SpriteSheets['assets/sprites/controlpanel'].getFrame('back-'+ungravity.settings.colors['episode'+episode.name]+'.png'))
+            .setSize(64,32)
+            .setPosition(525, 445);
+        anim.addTarget(back);
+        anim.addTarget(chooseLabel);
+        this.layer.appendChild(back);
         anim.play();
+        goog.events.listen(back, ['mousedown', 'touchend'], function() {
+            ungravity.director.replaceScene(new ungravity.scenes.Menu(), lime.transitions.Dissolve);
+        });
     }
 });

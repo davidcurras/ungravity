@@ -1,15 +1,9 @@
 goog.provide('ungravity.entities.Ball');
-
-goog.require('lime.SpriteSheet');
-goog.require('lime.parser.JSON');
-goog.require('lime.animation.KeyframeAnimation');
-goog.require('lime.fill.Frame');
-goog.require('lime.ASSETS.ball.json');
-goog.require('lime.audio.Audio');
 goog.require('ungravity.entities.Entity');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {ungravity.entities.Entity}
  * @param  {Object} tmxObj The Tiled object with the Ball initial settings
  * @param  {ungravity.entities.World} world The current world where create the ball
  * @param  {String} color The ball color
@@ -18,7 +12,7 @@ goog.require('ungravity.entities.Entity');
 ungravity.entities.Ball = function(tmxObj, world, color) {
     goog.base(this);
     this.objClass = 'ball';
-    this.spriteSheet = ungravity.Assets.SpriteSheets['assets/sprites/ball'];
+    this.spriteSheet = ungravity.Assets.SpriteSheets['assets/sprites/ballanim'];
     var px = tmxObj.px + (tmxObj.width/2);
     var py = tmxObj.py + (tmxObj.height/2);
     var mult = ungravity.settings.b2dMultiplier;
@@ -37,12 +31,12 @@ ungravity.entities.Ball = function(tmxObj, world, color) {
     this.b2dObject.CreateFixture(fixture);
     //this.b2dObject.isBullet = true;
     this.b2dObject.SetUserData(tmxObj.name);
-    var frame = this.spriteSheet.getFrame(color+'-ball-live-01.png');
+    var frame = this.spriteSheet.getFrame('ball-'+color+'-live-01.png');
     this.limeObject = new lime.Circle().setFill(frame).setSize(32, 32).setPosition(px, py);
     var anim = new lime.animation.KeyframeAnimation();
     anim.delay= 1/5;
     for(var i=1;i<=5;i++){
-        frame = this.spriteSheet.getFrame(color+'-ball-live-0'+i+'.png');
+        frame = this.spriteSheet.getFrame('ball-'+color+'-live-0'+i+'.png');
         anim.addFrame(frame);
     }
     this.limeObject.runAction(anim);

@@ -1,33 +1,74 @@
 goog.provide('ungravity.scenes.Presentation');
-
-goog.require('lime');
 goog.require('lime.Scene');
-goog.require('lime.Layer');
-goog.require('lime.Sprite');
-goog.require('lime.animation.Sequence');
-goog.require('lime.animation.Spawn');
-goog.require('lime.animation.ScaleBy');
-goog.require('lime.animation.FadeTo');
-goog.require('lime.animation.Delay');
-goog.require('lime.transitions.Dissolve');
-goog.require('lime.audio.Audio');
-goog.require('ungravity.scenes.Menu');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {lime.Scene}
  * @return {ungravity.scenes.Presentation}
  */
 ungravity.scenes.Presentation = function() {
     goog.base(this);
-    this.layer = new lime.Layer();
+    this.layer = new lime.Layer().setAnchorPoint(0.5, 0.5);
+    var controlSS = ungravity.Assets.SpriteSheets['assets/sprites/controlpanel'];
     var logo = new lime.Sprite()
         .setFill(ungravity.Assets.Images['assets/texts/ungravity.png'])
-        .setRotation(10)
+        .setAnchorPoint(0.5, 0.5)
+        .setRotation(0)
         .setPosition(ungravity.settings.width/2, ungravity.settings.height/2)
-        .setSize(35, 10)
-        .setOpacity(0);
-    var anim = this.animate(logo);
+        .setSize(798, 222);
+    this.layer.appendChild(logo);
+    var sprites = {
+        'ball1':{
+            'frame':'ball-brown.png',
+            'fromX':250,
+            'fromY':272,
+            'toX':-20,
+            'toY':272,
+            'sprite':undefined
+        },
+        'ball2':{
+            'frame':'ball-red.png',
+            'fromX':51,
+            'fromY':207,
+            'toX':51,
+            'toY':-20,
+            'sprite':undefined
+        },
+        'ball3':{
+            'frame':'ball-blue.png',
+            'fromX':352,
+            'fromY':210,
+            'toX':352,
+            'toY':ungravity.settings.height+20,
+            'sprite':undefined
+        },
+        'ball4':{
+            'frame':'ball-green.png',
+            'fromX':582,
+            'fromY':242,
+            'toX':582,
+            'toY':ungravity.settings.height+20,
+            'sprite':undefined
+        },
+        'ball5':{
+            'frame':'ball-purple.png',
+            'fromX':684,
+            'fromY':142,
+            'toX':ungravity.settings.width+20,
+            'toY':142,
+            'sprite':undefined
+        }
+    };
+    for(var key in sprites){
+        sprites[key].sprite = new lime.Sprite()
+            .setFill(controlSS.getFrame(sprites[key].frame))
+            .setAnchorPoint(0.5, 0.5)
+            .setSize(32,32)
+            .setPosition(sprites[key].fromX, sprites[key].fromY);
+        this.layer.appendChild(sprites[key].sprite);
+    }
     ungravity.Assets.Sounds['assets/sounds/presentation'].play();
+    var anim = this.animate(sprites);
     this.appendChild(this.layer);
     goog.events.listen(anim, lime.animation.Event.STOP, this.animationEndHandler);
 };
@@ -43,18 +84,19 @@ goog.object.extend(ungravity.scenes.Presentation.prototype, {
 
     /**
      * Adds animations to the game logo
-     * @param  {lime.Sprite} logo The game logo
-     * @return {lime.animation.Animation} The logo animation
+     * @param  {Object} sprites A hash with the sprites to animate
+     * @return {lime.animation.Animation} The balls animations
      */
-    animate: function(logo) {
-        var anim = new lime.animation.Sequence(
-            new lime.animation.Spawn( new lime.animation.ScaleBy(10).setDuration(5), new lime.animation.FadeTo(1).setDuration(5)),
-            new lime.animation.Delay().setDuration(1.5),
-            new lime.animation.Spawn( new lime.animation.ScaleBy(2).setDuration(2), new lime.animation.FadeTo(0).setDuration(2))
-        );
-        this.layer.appendChild(logo);
-        anim.addTarget(logo);
-        anim.play();
+    animate: function(sprites) {
+        var anim;
+        for(var key in sprites){
+            anim = new lime.animation.Sequence( 
+                new lime.animation.Delay().setDuration(1.5),
+                new lime.animation.MoveTo(sprites[key].toX, sprites[key].toY).setDuration(4)
+            );
+            anim.addTarget(sprites[key].sprite);
+            anim.play();
+        }
         return anim;
     },
 

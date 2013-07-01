@@ -1,27 +1,9 @@
 goog.provide('ungravity.scenes.Loading');
-
-goog.require('lime');
-goog.require('lime.Director');
 goog.require('lime.Scene');
-goog.require('lime.Layer');
-goog.require('lime.Label');
-goog.require('lime.SpriteSheet');
-goog.require('lime.parser.JSON');
-goog.require('lime.parser.TMX');
-goog.require('lime.animation.KeyframeAnimation');
-goog.require('lime.fill.Frame');
-goog.require('lime.fill.Image');
-goog.require('lime.ASSETS.ball.json');
-goog.require('lime.ASSETS.controls.json');
-goog.require('lime.ASSETS.star.json');
-goog.require('lime.audio.Audio');
-goog.require('ungravity.entities.Ball');
-goog.require('ungravity.entities.Goal');
-goog.require('ungravity.entities.Star');
-goog.require('ungravity.entities.Wall');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {lime.Scene}
  * @return {ungravity.scenes.Loading}
  */
 ungravity.scenes.Loading = function() {
@@ -37,7 +19,7 @@ ungravity.scenes.Loading = function() {
             try {
                 this.loadAsset(assetKey, typeKey);
             } catch (e) {
-                ungravity.log('scenes.Loading at line 37:\t\t'+e.message, 'err');
+                ungravity.log('scenes.Loading at line 20:\t\t'+e.message, 'err');
                 this.checkLoadedAssets();
             }
         }
@@ -73,8 +55,8 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
     createLabel: function() {
         this.label = new lime.Label()
             .setText('Loading... ')
-            .setFontFamily('Verdana')
-            .setFontSize(16)
+            .setFontFamily('Permanent Marker')
+            .setFontSize(24)
             .setFontColor('#ffffff')
             .setAnchorPoint(0.5, 0.5)
             .setPosition(ungravity.settings.width/2, ungravity.settings.height/2);
@@ -93,10 +75,11 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
                     levelName += '0';
                 }
                 levelName += j;
-                ungravity.Assets.Maps['assets/maps/map'+levelName+'.tmx'] = null;
-                ungravity.Assets.Images['assets/thumbnails/level'+levelName+'.png'] = null;
+                ungravity.Assets.Maps['assets/maps/map'+levelName+'.tmx'] = undefined;
+                ungravity.Assets.Images['assets/thumbnails/level'+levelName+'.png'] = undefined;
+                ungravity.Assets.Images['assets/thumbnails/level'+levelName+'-locked.png'] = undefined;
             }
-            ungravity.Assets.Images['assets/thumbnails/episode'+i+'.png'] = null;
+            ungravity.Assets.Images['assets/thumbnails/episode'+i+'.png'] = undefined;
         }
         ungravity.Assets.Total += Object.keys(ungravity.Assets.Images).length;
         ungravity.Assets.Total += Object.keys(ungravity.Assets.Maps).length;
@@ -111,8 +94,8 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
      * @return {undefined} Nothing returned
      */
     loadAsset: function(src, type){
-        var newObj = null;
-        var callbackFn = null;
+        var newObj = undefined;
+        var callbackFn = undefined;
         var hasCallbackFn = false;
         var that = this;
         switch(type.toUpperCase()){
@@ -198,6 +181,10 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
             ungravity.entities.Goal.sound = ungravity.Assets.Sounds['assets/sounds/win'];
             ungravity.entities.Star.sound = ungravity.Assets.Sounds['assets/sounds/star'];
             ungravity.entities.Wall.sound = ungravity.Assets.Sounds['assets/sounds/wallBounce'];
+            for(var key in ungravity.Assets.Sounds){
+                ungravity.Assets.Sounds[key].setVolume(ungravity.settings.soundsVolume);
+            }
+            ungravity.scenes.Play.CreateSpritesAndLabels();
             ungravity.director.replaceScene(new ungravity.scenes.Presentation());
         } else {
             this.label.setText('Loading... '+Math.floor(ungravity.Assets.Loaded*100/ungravity.Assets.Total)+'%');

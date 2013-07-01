@@ -1,28 +1,18 @@
 goog.provide('ungravity.scenes.Menu');
-
-goog.require('lime');
 goog.require('lime.Scene');
-goog.require('lime.Layer');
-goog.require('lime.Sprite');
-goog.require('lime.animation.Spawn');
-goog.require('lime.animation.ScaleBy');
-goog.require('lime.animation.FadeTo');
-goog.require('lime.transitions.Dissolve');
-goog.require('ungravity.scenes.Episodes');
-goog.require('ungravity.scenes.Credits');
-goog.require('ungravity.scenes.Options');
 
 /**
- * Constructor
+ * @constructor
+ * @extends {lime.Scene}
  * @return {ungravity.scenes.Menu}
  */
 ungravity.scenes.Menu = function() {
     goog.base(this);    
     this.layer = new lime.Layer();
     var menuOptions = [
-        {textImageName:'play', sprite:undefined, width:139, height:69, scene:ungravity.scenes.Episodes},
-        {textImageName:'options', sprite:undefined, width:211, height:69, scene:ungravity.scenes.Options},
-        {textImageName:'credits', sprite:undefined, width:209, height:69, scene:ungravity.scenes.Credits}
+        {textImageName:'play', sprite:undefined, width:114, height:67, scene:ungravity.scenes.Episodes},
+        {textImageName:'options', sprite:undefined, width:207, height:67, scene:ungravity.scenes.Options},
+        {textImageName:'credits', sprite:undefined, width:207, height:56, scene:ungravity.scenes.Credits}
     ];
     this.createOptions(menuOptions);
     this.appendChild(this.layer);

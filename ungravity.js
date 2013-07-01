@@ -2,10 +2,62 @@
 goog.provide('ungravity');
 
 //get requirements
+goog.require('goog.object');
 goog.require('lime');
+goog.require('lime.animation.Delay');
+goog.require('lime.animation.Easing');
+goog.require('lime.animation.FadeTo');
+goog.require('lime.animation.MoveTo');
+goog.require('lime.animation.Sequence');
+goog.require('lime.animation.ScaleBy');
+goog.require('lime.animation.Spawn');
+goog.require('lime.animation.KeyframeAnimation');
+goog.require('lime.ASSETS.ballanim.json');
+goog.require('lime.ASSETS.controlpanel.json');
+goog.require('lime.ASSETS.staranim.json');
+goog.require('lime.audio.Audio');
+goog.require('lime.Circle');
 goog.require('lime.Director');
+goog.require('lime.fill.Frame');
+goog.require('lime.fill.Image');
+goog.require('lime.Label');
+goog.require('lime.Layer');
+goog.require('lime.parser.JSON');
+goog.require('lime.parser.TMX');
+goog.require('lime.RoundedRect');
+goog.require('lime.Scene');
+goog.require('lime.Sprite');
+goog.require('lime.SpriteSheet');
+goog.require('lime.transitions.Dissolve');
+
+goog.require('box2d.BodyDef');
+goog.require('box2d.CircleShape');
+goog.require('box2d.ContactListener');
+goog.require('box2d.DebugDraw');
+goog.require('box2d.FixtureDef');
+goog.require('box2d.PolygonShape');
+goog.require('box2d.Vec2');
+goog.require('box2d.World');
+
+goog.require('ungravity.ContactListener');
+goog.require('ungravity.entities.Entity');
+goog.require('ungravity.entities.Ball');
+goog.require('ungravity.entities.BadBall');
+goog.require('ungravity.entities.Goal');
+goog.require('ungravity.entities.GoodBall');
 goog.require('ungravity.entities.Player');
+goog.require('ungravity.entities.Star');
+goog.require('ungravity.entities.Wall');
+goog.require('ungravity.entities.World');
+goog.require('ungravity.scenes.Credits');
+goog.require('ungravity.scenes.Episodes');
+goog.require('ungravity.scenes.Levels');
 goog.require('ungravity.scenes.Loading');
+goog.require('ungravity.scenes.Menu');
+goog.require('ungravity.scenes.Options');
+goog.require('ungravity.scenes.Play');
+goog.require('ungravity.scenes.Presentation');
+goog.require('ungravity.scenes.Win');
 
 /**
  * The world object
@@ -20,34 +72,48 @@ ungravity.World = undefined;
 ungravity.Player = undefined;
 
 /**
+ * If trying to access a level lower than 
+ * the first level this id will be returned
+ * @type {Number}
+ */
+ungravity.ZeroLevelId = 0;
+
+/**
+ * When the player wins the last level of 
+ * the last episode this id will be returned
+ * @type {Number}
+ */
+ungravity.AfterLastLevelId = Infinity;
+
+/**
  * The asset list to download
  * @type {Object}
  */
 ungravity.Assets = {
     'Images':{
-        'assets/maps/tileset.png': null,
-        'assets/sprites/goal.png': null,
-        'assets/texts/credits.png': null,
-        'assets/texts/dcg.png': null,
-        'assets/texts/options.png': null,
-        'assets/texts/play.png': null,
-        'assets/texts/ungravity.png': null
+        'assets/maps/tileset.png': undefined,
+        'assets/sprites/goal.png': undefined,
+        'assets/texts/credits.png': undefined,
+        'assets/texts/dcg.png': undefined,
+        'assets/texts/options.png': undefined,
+        'assets/texts/play.png': undefined,
+        'assets/texts/ungravity.png': undefined
         //Thumbnails will be added to this list in Loading Scene
     },
     'Maps':{
         //Maps will be added to this list in Loading Scene
     },
     'SpriteSheets':{
-        'assets/sprites/ball': null,
-        'assets/sprites/controls': null,
-        'assets/sprites/star': null
+        'assets/sprites/ballanim': undefined,
+        'assets/sprites/controlpanel': undefined,
+        'assets/sprites/staranim': undefined
     },
     'Sounds':{
-        'assets/sounds/ballCollision': null,
-        'assets/sounds/star': null,
-        'assets/sounds/presentation': null,
-        'assets/sounds/wallBounce': null,
-        'assets/sounds/win': null
+        'assets/sounds/ballCollision': undefined,
+        'assets/sounds/star': undefined,
+        'assets/sounds/presentation': undefined,
+        'assets/sounds/wallBounce': undefined,
+        'assets/sounds/win': undefined
     },
     'Total':0,
     'Loaded':0
@@ -61,9 +127,33 @@ ungravity.settings = {
 
     /**
      * The audio file extension depends on the browser
-     * @type {Number}
+     * @type {String}
      */
     audioFileExtension: 'mp3',
+
+    /**
+     * True if the game is muted
+     * @type {Boolean}
+     */
+    isMuted: false,
+
+    /**
+     * The initial volume of the game sounds
+     * @type {Number}
+     */
+    soundsVolume: 0.5,
+
+    /**
+     * The initial volume of the game music
+     * @type {Number}
+     */
+    musicVolume: 0.5,
+
+    /**
+     * The color for each episode
+     * @type {Boolean}
+     */
+    colors: {'episode1':'brown', 'episode2':'blue', 'episode3':'green', 'episode4':'purple'},
 
     /**
      * True if the dinamic bodies in the box2d World must sleep when are in rest
@@ -129,7 +219,25 @@ ungravity.settings = {
      * The control panel width
      * @type {Number}
      */
-    cpWidth: 160
+    cpWidth: 160,
+
+    /**
+     * True if is the first time the world is created
+     * @type {Boolean}
+     */
+    firstRun: true,
+
+    /**
+     * True if is running from a touch device
+     * @type {Boolean}
+     */
+    isTouch: true,
+
+    /**
+     * True if must render in HTML5 canvas
+     * @type {Boolean}
+     */
+    canvasRender: false
 };
 
 /**
@@ -162,6 +270,12 @@ ungravity.start = function(){
     ungravity.director.setDisplayFPS(true);
     if (goog.userAgent.GECKO){
         ungravity.settings.audioFileExtension = 'ogg';
+    }
+    try {  
+        document.createEvent("TouchEvent");  
+        ungravity.settings.isTouch = true;  
+    } catch (e) {  
+        ungravity.settings.isTouch = false;  
     }
     ungravity.director.replaceScene(new ungravity.scenes.Loading());
 };

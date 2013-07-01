@@ -1,14 +1,7 @@
 goog.provide('ungravity.entities.Entity');
 
-goog.require('lime.Sprite');
-goog.require('lime.Circle');
-goog.require('box2d.PolygonShape');
-goog.require('box2d.CircleShape');
-goog.require('box2d.BodyDef');
-goog.require('box2d.FixtureDef');
-
 /**
- * Constructor
+ * @constructor
  * @return {ungravity.entities.Entity}
  */
 ungravity.entities.Entity = function() { };

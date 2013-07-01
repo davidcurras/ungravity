@@ -6,9 +6,9 @@ CACHE MANIFEST
 
 
 ungravity.js
-assets/sprites/ball.json.js
-assets/sprites/controls.json.js
-assets/sprites/star.json.js
+assets/sprites/ballanim.json.js
+assets/sprites/controlpanel.json.js
+assets/sprites/staranim.json.js
 
 assets/maps/map101.tmx
 assets/maps/map102.tmx
@@ -51,10 +51,28 @@ assets/thumbnails/level206.png
 assets/thumbnails/level207.png
 assets/thumbnails/level208.png
 assets/thumbnails/level209.png
+assets/thumbnails/level101-locked.png
+assets/thumbnails/level102-locked.png
+assets/thumbnails/level103-locked.png
+assets/thumbnails/level104-locked.png
+assets/thumbnails/level105-locked.png
+assets/thumbnails/level106-locked.png
+assets/thumbnails/level107-locked.png
+assets/thumbnails/level108-locked.png
+assets/thumbnails/level109-locked.png
+assets/thumbnails/level201-locked.png
+assets/thumbnails/level202-locked.png
+assets/thumbnails/level203-locked.png
+assets/thumbnails/level204-locked.png
+assets/thumbnails/level205-locked.png
+assets/thumbnails/level206-locked.png
+assets/thumbnails/level207-locked.png
+assets/thumbnails/level208-locked.png
+assets/thumbnails/level209-locked.png
 assets/sprites/goal.png
-assets/sprites/ball.png
-assets/sprites/controls.png
-assets/sprites/star.png
+assets/sprites/ballanim.png
+assets/sprites/controlpanel.png
+assets/sprites/staranim.png
 assets/texts/credits.png
 assets/texts/dcg.png
 assets/texts/options.png
