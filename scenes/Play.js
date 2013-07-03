@@ -9,9 +9,14 @@ goog.require('lime.Scene');
  */
 ungravity.scenes.Play = function(level) {
     goog.base(this);
+    if(ungravity.settings.canvasRenderer){
+       this.setRenderer(lime.Renderer.CANVAS) 
+    }
     this.cpLayer = new lime.Layer().setAnchorPoint(0,0).setPosition(641,0).setSize(160, 480);
     this.bgLayer = new lime.Layer().setAnchorPoint(0,0).setPosition(0,0).setSize(640, 480);
     this.objLayer = new lime.Layer().setAnchorPoint(0,0).setPosition(0,0).setSize(640, 480);
+    var bgSprite = new lime.Sprite().setAnchorPoint(0,0).setPosition(0,0).setSize(640-32, 480).setFill(0,0,0);
+    this.bgLayer.appendChild(bgSprite); //for make the bgLayer clickeable
     this.appendChild(this.cpLayer);
     this.appendChild(this.bgLayer);
     this.appendChild(this.objLayer);
@@ -23,7 +28,6 @@ ungravity.scenes.Play = function(level) {
     ungravity.Player.levelName = level;
     ungravity.World.startUpdating();
     ungravity.World.pause(ungravity.scenes.Play.ModalTypes.Start);
-    ungravity.settings.firstRun = false;
 };
 
 goog.inherits(ungravity.scenes.Play, lime.Scene);
@@ -71,10 +75,8 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         Spt.CtrlPanel.Menu.setFill(controlSS.getFrame('menu-'+ungravity.World.color+'.png'));
         Spt.Modal.LevelBalls.setFill(controlSS.getFrame('ball-'+ungravity.World.color+'.png'));
         Spt.Modal.Prev.setFill(controlSS.getFrame('prev-'+ungravity.World.color+'.png'));
-        Spt.Modal.Replay.setFill(controlSS.getFrame('replay-'+ungravity.World.color+'.png'));
         Spt.Modal.Next.setFill(controlSS.getFrame('next-'+ungravity.World.color+'.png'));
         Spt.Modal.Mute.setFill(controlSS.getFrame('mute-'+ungravity.World.color+'.png'));
-        Spt.Modal.Menu.setFill(controlSS.getFrame('menu-'+ungravity.World.color+'.png'));
     },
 
     /**
@@ -91,18 +93,31 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
             this.cpLayer.appendChild(Lbl[key]);
         }
         Spt.Gravity.setFill(controlSS.getFrame('down-'+ungravity.World.color+'.png'));
-        Spt.Prev.setFill(controlSS.getFrame('prev-'+ungravity.World.color+'.png'));
+        var prevLevelName = ungravity.World.getPrevLevelName();
+        if((prevLevelName !== ungravity.ZeroLevelId) && (typeof ungravity.Player.levelStars[prevLevelName] !== 'undefined')){
+            Spt.Prev.setFill(controlSS.getFrame('prev-'+ungravity.World.color+'.png'));
+        } else {
+            Spt.Prev.setFill(controlSS.getFrame('prev-'+ungravity.World.color+'-active.png'));
+        }
         Spt.Replay.setFill(controlSS.getFrame('replay-'+ungravity.World.color+'.png'));
-        Spt.Next.setFill(controlSS.getFrame('next-'+ungravity.World.color+'.png'));
+        var nextLevelName = ungravity.World.getNextLevelName();
+        if((nextLevelName !== ungravity.AfterLastLevelId) && (typeof ungravity.Player.levelStars[nextLevelName] !== 'undefined')){
+            Spt.Next.setFill(controlSS.getFrame('next-'+ungravity.World.color+'.png'));
+        } else {
+            Spt.Next.setFill(controlSS.getFrame('next-'+ungravity.World.color+'-active.png'));
+        }
         Spt.Pause.setFill(controlSS.getFrame('pause-'+ungravity.World.color+'.png'));
-        Spt.Mute.setFill(controlSS.getFrame('mute-'+ungravity.World.color+'.png'));
+        if(ungravity.settings.isMuted){
+            Spt.Mute.setFill(controlSS.getFrame('unmute-'+ungravity.World.color+'.png'));
+        } else {
+            Spt.Mute.setFill(controlSS.getFrame('mute-'+ungravity.World.color+'.png'));
+        }
         Spt.Menu.setFill(controlSS.getFrame('menu-'+ungravity.World.color+'.png'));
         for (var key in Spt) {
+            goog.events.removeAll(Spt[key]);
             this.cpLayer.appendChild(Spt[key]);
         }
-        if(ungravity.settings.firstRun){
-            this.listenControlPanel();
-        }
+        this.listenControlPanel();
     },
 
     /**
@@ -123,8 +138,6 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
                     ungravity.director.replaceScene(new ungravity.scenes.Play(prevLevelName), lime.transitions.Dissolve);
                 };
             });
-        } else {
-            Spt.Prev.setFill(controlSS.getFrame('prev-'+ungravity.World.color+'-active.png'));
         }
         goog.events.listen(Spt.Replay, ['mousedown', 'touchend'], function(){
             ungravity.World.pause(ungravity.scenes.Play.ModalTypes.Abort);
@@ -140,8 +153,6 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
                     ungravity.director.replaceScene(new ungravity.scenes.Play(nextLevelName), lime.transitions.Dissolve);
                 };
             });
-        } else {
-            Spt.Next.setFill(controlSS.getFrame('next-'+ungravity.World.color+'-active.png'));
         }
         goog.events.listen(Spt.Mute, ['mousedown', 'touchend'], function(){
             if(ungravity.settings.isMuted){
@@ -206,14 +217,14 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.infoLayer.appendChild(Lbl.MainText);
         this.infoLayer.appendChild(Spt.Close);
         this.infoLayer.appendChild(Lbl.Start);
-        this.infoLayer.appendChild(Spt.Menu);
+        this.infoLayer.appendChild(Lbl.Menu);
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
             e.event.stopPropagation()
         });
         goog.events.listen(Lbl.Start, ['mousedown', 'touchend'], function(){
             ungravity.World.resume();
         });
-        goog.events.listen(Spt.Menu, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Levels(ungravity.World.episode), lime.transitions.Dissolve);
         });
         goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(){
@@ -247,12 +258,16 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.infoLayer.appendChild(Spt.LevelBalls);
         this.infoLayer.appendChild(Lbl.LevelBalls);
         this.infoLayer.appendChild(Lbl.PlayerScore);
-        this.infoLayer.appendChild(Spt.Menu);
+        this.infoLayer.appendChild(Lbl.Menu);
+        this.infoLayer.appendChild(Lbl.Close);
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
             e.event.stopPropagation()
         });
-        goog.events.listen(Spt.Menu, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Levels(ungravity.World.episode), lime.transitions.Dissolve);
+        });
+        goog.events.listen(Lbl.Close, ['mousedown', 'touchend'], function(){
+            ungravity.World.resume();
         });
         goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(){
             ungravity.World.resume();
@@ -287,15 +302,19 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.infoLayer.appendChild(Spt.LevelBalls);
         this.infoLayer.appendChild(Lbl.LevelBalls);
         this.infoLayer.appendChild(Lbl.PlayerScore);
-        this.infoLayer.appendChild(Spt.Menu);
+        this.infoLayer.appendChild(Lbl.Menu);
         this.infoLayer.appendChild(Lbl.OK);
+        this.infoLayer.appendChild(Lbl.Close);
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
             e.event.stopPropagation()
+        });
+        goog.events.listen(Lbl.Close, ['mousedown', 'touchend'], function(){
+            ungravity.World.resume();
         });
         goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(){
             ungravity.World.resume();
         });
-        goog.events.listen(Spt.Menu, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Levels(ungravity.World.episode), lime.transitions.Dissolve);
         });
         goog.events.listen(Lbl.OK, ['mousedown', 'touchend'], function(){
@@ -323,6 +342,8 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         Lbl.LevelBalls.setText(''+ungravity.World.goodballs.collected+'/'+ungravity.World.goodballs.total);
         Lbl.PlayerScore.setText('Score: '+ungravity.Player.getTotalPoints());
         Lbl.Title.setText('You win!!!');
+        var txt = ungravity.settings.isTouch ? 'Tap' : 'Click';
+        Lbl.MainText.setText(txt+' OK to continue');
         this.infoLayer.appendChild(Spt.Background);
         this.infoLayer.appendChild(Lbl.Title);
         this.infoLayer.appendChild(Lbl.MainText);
@@ -331,16 +352,16 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.infoLayer.appendChild(Spt.LevelBalls);
         this.infoLayer.appendChild(Lbl.LevelBalls);
         this.infoLayer.appendChild(Lbl.PlayerScore);
-        this.infoLayer.appendChild(Spt.Replay);
-        this.infoLayer.appendChild(Spt.Menu);
+        this.infoLayer.appendChild(Lbl.Replay);
+        this.infoLayer.appendChild(Lbl.Menu);
         this.infoLayer.appendChild(Lbl.OK);
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
             e.event.stopPropagation()
         });
-        goog.events.listen(Spt.Replay, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Replay, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Play(ungravity.World.getLevelName()), lime.transitions.Dissolve);
         });
-        goog.events.listen(Spt.Menu, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Levels(ungravity.World.episode), lime.transitions.Dissolve);
         });
         goog.events.listen(Lbl.OK, ['mousedown', 'touchend'], function(){
@@ -404,10 +425,8 @@ ungravity.scenes.Play.SpritesAndLabels = {
             'LevelStars': undefined,
             'LevelBalls': undefined,
             'Prev': undefined,
-            'Replay': undefined,
             'Next': undefined,
-            'Mute': undefined,
-            'Menu': undefined
+            'Mute': undefined
         }
     },
     'Labels':{
@@ -425,7 +444,10 @@ ungravity.scenes.Play.SpritesAndLabels = {
             'Title': undefined,
             'MainText': undefined,
             'Start': undefined,
-            'OK': undefined
+            'OK': undefined,
+            'Replay': undefined,
+            'Menu': undefined,
+            'Close': undefined
         }
     }
 };
@@ -474,10 +496,19 @@ ungravity.scenes.Play.CreateSpritesAndLabels = function() {
         .setSize(400, 100);
     Lbl.Modal.Start.setText('Start')
         .setFontSize(32)
-        .setPosition(0, 150);
+        .setPosition(200, 150);
     Lbl.Modal.OK.setText('OK')
         .setFontSize(32)
         .setPosition(0, 150);
+    Lbl.Modal.Replay.setText('Replay')
+        .setFontSize(32)
+        .setPosition(200, 150);
+    Lbl.Modal.Menu.setText('Menu')
+        .setFontSize(32)
+        .setPosition(-200, 150);
+    Lbl.Modal.Close.setText('Close')
+        .setFontSize(32)
+        .setPosition(200, 150);
     //Creating Control Panel Sprites
     for (var key in Spt.CtrlPanel) {
         Spt.CtrlPanel[key] = new lime.Sprite()
@@ -523,13 +554,8 @@ ungravity.scenes.Play.CreateSpritesAndLabels = function() {
         .setPosition(-32, 50);
     Spt.Modal.Prev.setFill(controlSS.getFrame('prev-brown.png'))
         .setPosition(-60, 110);
-    Spt.Modal.Replay.setFill(controlSS.getFrame('replay-brown.png'))
-        .setPosition(100, 150);
     Spt.Modal.Next.setFill(controlSS.getFrame('next-brown.png'))
         .setPosition(60, 110);
     Spt.Modal.Mute.setFill(controlSS.getFrame('mute-brown.png'))
         .setPosition(-200, 200);
-    Spt.Modal.Menu.setFill(controlSS.getFrame('menu-brown.png'))
-        .setSize(64,32)
-        .setPosition(200, 150);
 };

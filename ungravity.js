@@ -92,7 +92,6 @@ ungravity.AfterLastLevelId = Infinity;
 ungravity.Assets = {
     'Images':{
         'assets/maps/tileset.png': undefined,
-        'assets/sprites/goal.png': undefined,
         'assets/texts/credits.png': undefined,
         'assets/texts/dcg.png': undefined,
         'assets/texts/options.png': undefined,
@@ -222,12 +221,6 @@ ungravity.settings = {
     cpWidth: 160,
 
     /**
-     * True if is the first time the world is created
-     * @type {Boolean}
-     */
-    firstRun: true,
-
-    /**
      * True if is running from a touch device
      * @type {Boolean}
      */
@@ -237,7 +230,7 @@ ungravity.settings = {
      * True if must render in HTML5 canvas
      * @type {Boolean}
      */
-    canvasRender: false
+    canvasRenderer: true
 };
 
 /**
