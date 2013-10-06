@@ -48,9 +48,9 @@ goog.object.extend(ungravity.scenes.Win.prototype, {
             var xPos = ungravity.settings.width/2;
             var yPos = (ungravity.settings.height/2) - ((defaultLabelHeight/2)*creditLines.length) + (defaultLabelHeight*i);
             var label = new lime.Label()
-                .setText(line)
-                .setFontFamily('Quantico')
-                .setFontSize(20)
+                .setText(line.text)
+                .setFontFamily(line.font)
+                .setFontSize(line.size)
                 .setFontColor('#ffffff')
                 .setAnchorPoint(0.5, 0.5)
                 .setPosition(xPos, yPos);
