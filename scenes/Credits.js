@@ -33,8 +33,11 @@ goog.object.extend(ungravity.scenes.Credits.prototype, {
             {'text':'Idea & Design & Programming', 'font':'Permanent Marker', 'size':36},
             {'text':'David Curras', 'font':'Quantico', 'size':28},
             {'text':' ', 'font':'Quantico', 'size':20},
-            {'text':'Graphics & Music', 'font':'Permanent Marker', 'size':36},
-            {'text':'Renzo Gustavino', 'font':'Quantico', 'size':28}
+            {'text':'Graphics & Sounds', 'font':'Permanent Marker', 'size':36},
+            {'text':'Renzo Gustavino', 'font':'Quantico', 'size':28},
+            {'text':' ', 'font':'Quantico', 'size':20},
+            {'text':'Music', 'font':'Permanent Marker', 'size':36},
+            {'text':'Julian Vega', 'font':'Quantico', 'size':28}
         ];
         for(var i in creditLines){
             var line = creditLines[i];
