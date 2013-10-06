@@ -5,9 +5,9 @@ goog.provide('ungravity.entities.Player');
  * @return {ungravity.entities.Player}
  */
 ungravity.entities.Player = function() {
-    for(var i = 0; i <= ungravity.settings.episodes; i++){
+    for(var i = 1; i <= ungravity.settings.episodes; i++){
         var episodeName = ''+i;
-        for(var j = 0; j <= ungravity.settings.levelsPerEpisode; j++){
+        for(var j = 1; j <= ungravity.settings.levelsPerEpisode; j++){
             levelName = episodeName;
             if(j < 10){
                 levelName += '0';
@@ -18,6 +18,14 @@ ungravity.entities.Player = function() {
     }
     this.levelStars['101'] = 0;
     this.levelStars['201'] = 0;
+    var spl = goog.crypt.base64.encodeString(goog.json.serialize(this.levelStars));
+    var stars = goog.net.cookies.get('stars', spl);
+    this.levelStars = goog.json.parse(goog.crypt.base64.decodeString(stars));
+    for(var key in this.levelStars){
+        if(this.levelStars[key] === null){
+            this.levelStars[key] = undefined;
+        }
+    }
 };
 
 goog.object.extend(ungravity.entities.Player.prototype, {
