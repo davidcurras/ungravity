@@ -96,9 +96,11 @@ ungravity.scenes.Options.ToggleGraphics = function(){
     if(ungravity.settings.canvasRenderer){
         canvasOnOff.label.setText('HTML Elements Renderer');
         ungravity.settings.canvasRenderer = false;
+        goog.net.cookies.set('canv', '0');
     } else {
         canvasOnOff.label.setText('Canvas Renderer');
         ungravity.settings.canvasRenderer = true;
+        goog.net.cookies.set('canv', '1');
     }
 };
 

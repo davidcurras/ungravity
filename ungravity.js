@@ -3,6 +3,10 @@ goog.provide('ungravity');
 
 //get requirements
 goog.require('goog.object');
+goog.require('goog.net.cookies');
+goog.require('goog.json');
+goog.require('goog.crypt.base64');
+
 goog.require('lime');
 goog.require('lime.animation.Delay');
 goog.require('lime.animation.Easing');
@@ -51,6 +55,7 @@ goog.require('ungravity.entities.Wall');
 goog.require('ungravity.entities.World');
 goog.require('ungravity.scenes.Credits');
 goog.require('ungravity.scenes.Episodes');
+goog.require('ungravity.scenes.Info');
 goog.require('ungravity.scenes.Levels');
 goog.require('ungravity.scenes.Loading');
 goog.require('ungravity.scenes.Menu');
@@ -109,6 +114,7 @@ ungravity.Assets = {
     },
     'Sounds':{
         'assets/sounds/ballCollision': undefined,
+        'assets/sounds/music': undefined,
         'assets/sounds/star': undefined,
         'assets/sounds/presentation': undefined,
         'assets/sounds/wallBounce': undefined,
@@ -230,7 +236,13 @@ ungravity.settings = {
      * True if must render in HTML5 canvas
      * @type {Boolean}
      */
-    canvasRenderer: true
+    canvasRenderer: true,
+
+    /**
+     * The game language ISO code
+     * @type {String}
+     */
+    language: 'en'
 };
 
 /**
@@ -258,6 +270,10 @@ ungravity.log = function(text, type){
  */
 ungravity.start = function(){
     ungravity.director = new lime.Director(document.body, ungravity.settings.width, ungravity.settings.height);
+    var canv = goog.net.cookies.get('canv', '1');
+    ungravity.settings.canvasRenderer = parseInt(canv) > 0 ? true : false;
+    var lang = goog.net.cookies.get('lang', 'en');
+    ungravity.settings.language = lang;
     ungravity.Player = new ungravity.entities.Player();
     ungravity.director.makeMobileWebAppCapable();
     ungravity.director.setDisplayFPS(true);
