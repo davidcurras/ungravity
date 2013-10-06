@@ -55,6 +55,8 @@ goog.object.extend(ungravity.ContactListener.prototype, {
                             ungravity.Player.levelStars[nextLevel] = 0;
                         }
                     }
+                    var spl = goog.crypt.base64.encodeString(goog.json.serialize(ungravity.Player.levelStars));
+                    goog.net.cookies.set('stars', spl);
                     ungravity.World.afterPause = function(){
                         if(nextLevel === ungravity.AfterLastLevelId){
                             ungravity.director.replaceScene(new ungravity.scenes.Win(), lime.transitions.Dissolve);
