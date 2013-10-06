@@ -158,6 +158,9 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
             if(ungravity.settings.isMuted){
                 lime.audio.setMute(false);
                 ungravity.settings.isMuted = false;
+                if(!ungravity.settings.isMuted && (typeof ungravity.Assets.Sounds['assets/sounds/music'] !== 'undefined')){
+                    ungravity.Assets.Sounds['assets/sounds/music'].play(1000);
+                }
                 Spt.Mute.setFill(controlSS.getFrame('mute-'+ungravity.World.color+'.png'));
             } else {
                 lime.audio.setMute(true);
@@ -210,8 +213,8 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         var Lbl = ungravity.scenes.Play.SpritesAndLabels.Labels.Modal;
         var Spt = ungravity.scenes.Play.SpritesAndLabels.Sprites.Modal;
         Lbl.Title.setText('Episode: '+ungravity.World.episode+' - Level: '+ungravity.World.level);
-        var txt = ungravity.settings.isTouch ? 'Tap' : 'Click';
-        Lbl.MainText.setText(txt+' to change the gravity and make the '+ungravity.World.color+' ball reach the goal');
+        var txt = ungravity.settings.isTouch ? 'TAP' : 'CLICK';
+        Lbl.MainText.setText(txt+' the screen to change the gravity RANDOMLY');
         this.infoLayer.appendChild(Spt.Background);
         this.infoLayer.appendChild(Lbl.Title);
         this.infoLayer.appendChild(Lbl.MainText);
@@ -292,7 +295,7 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         Lbl.LevelBalls.setText(''+ungravity.World.goodballs.collected+'/'+ungravity.World.goodballs.total);
         Lbl.PlayerScore.setText('Score: '+ungravity.Player.getTotalPoints());
         Lbl.Title.setText('Warning');
-        Lbl.MainText.setText('You will loose the progress of the current level');
+        Lbl.MainText.setText('You will lose the progress of the current level');
         this.infoLayer.appendChild(Spt.Background);
         this.infoLayer.appendChild(Spt.Close);
         this.infoLayer.appendChild(Lbl.Title);
