@@ -362,6 +362,9 @@ goog.object.extend(ungravity.entities.World.prototype, {
     pause: function(modalType) {
         if(!this.isPaused){
             this.isPaused = true;
+            if(!ungravity.settings.isMuted && (typeof ungravity.Assets.Sounds['assets/sounds/music'] !== 'undefined')){
+                ungravity.Assets.Sounds['assets/sounds/music'].stop();
+            }
             lime.scheduleManager.unschedule(this.update, this);
             switch(modalType){
                 case ungravity.scenes.Play.ModalTypes.Start:
@@ -388,6 +391,9 @@ goog.object.extend(ungravity.entities.World.prototype, {
         if(this.isPaused){
             this.isPaused = false;
             this.container.closeInfoModal();
+            if(!ungravity.settings.isMuted && (typeof ungravity.Assets.Sounds['assets/sounds/music'] !== 'undefined')){
+                ungravity.Assets.Sounds['assets/sounds/music'].play(1000);
+            }
             lime.scheduleManager.schedule(this.update, this);
         }
     },
