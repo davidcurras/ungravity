@@ -10,7 +10,7 @@ ungravity.scenes.Menu = function() {
     goog.base(this);    
     this.layer = new lime.Layer();
     var menuOptions = [
-        {textImageName:'play', sprite:undefined, width:114, height:67, scene:ungravity.scenes.Episodes},
+        {textImageName:'play', sprite:undefined, width:114, height:67, scene:ungravity.scenes.Info},
         {textImageName:'options', sprite:undefined, width:207, height:67, scene:ungravity.scenes.Options},
         {textImageName:'credits', sprite:undefined, width:207, height:56, scene:ungravity.scenes.Credits}
     ];
