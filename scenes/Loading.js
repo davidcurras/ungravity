@@ -125,7 +125,7 @@ goog.object.extend(ungravity.scenes.Loading.prototype, {
                 newObj.open("GET", src, true);
                 callbackFn = function () {
                     if(type.toUpperCase() == 'MAPS' || type.toUpperCase() == 'MAP'){
-                        ungravity.Assets.Maps[src] = new lime.parser.TMX(src);
+                        ungravity.Assets.Maps[src] = src;
                     } else if(type.toUpperCase() == 'SPRITESHEETSCRIPT'){
                         var objKey = src.substr(0, src.indexOf('.'));
                         var ssName = objKey.substr(objKey.lastIndexOf('/')+1);

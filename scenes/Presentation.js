@@ -105,6 +105,9 @@ goog.object.extend(ungravity.scenes.Presentation.prototype, {
      * @return {undefined} Nothing returned
      */
     animationEndHandler: function(){
+        for(var src in ungravity.Assets.Maps){
+            ungravity.Assets.Maps[src] = new lime.parser.TMX(src);
+        }
         ungravity.director.replaceScene(new ungravity.scenes.Menu(), lime.transitions.Dissolve);
     }
 });
