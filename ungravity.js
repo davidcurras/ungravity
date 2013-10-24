@@ -96,12 +96,22 @@ ungravity.AfterLastLevelId = Infinity;
  */
 ungravity.Assets = {
     'Images':{
+        'assets/icons/clock.png': undefined,
+        'assets/icons/star.png': undefined,
         'assets/maps/tileset.png': undefined,
         'assets/texts/credits.png': undefined,
         'assets/texts/dcg.png': undefined,
         'assets/texts/options.png': undefined,
         'assets/texts/play.png': undefined,
-        'assets/texts/ungravity.png': undefined
+        'assets/texts/ungravity.png': undefined,
+        'assets/tuts/tut101-goal.png': undefined,
+        'assets/tuts/tut101-click.png': undefined,
+        'assets/tuts/tut101-tap.png': undefined,
+        'assets/tuts/tut104-balls.png': undefined,
+        'assets/tuts/tut106-redstar.png': undefined,
+        'assets/tuts/tut108-time.png': undefined,
+        'assets/tuts/tut201-redball.png': undefined,
+        'assets/tuts/tut204-allstars.png': undefined
         //Thumbnails will be added to this list in Loading Scene
     },
     'Maps':{

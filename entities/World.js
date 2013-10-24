@@ -271,10 +271,33 @@ goog.object.extend(ungravity.entities.World.prototype, {
     },
 
     /**
-     * Changes the gravity randomly
+     * Changes the gravity clockwise
      * @return {undefined} Nothing returned
      */
     changeGravity: function() {
+        if(this.b2dObject.m_gravity.x == 0 && this.b2dObject.m_gravity.y > 0){
+            this.b2dObject.m_gravity.x = -1 * this.b2dObject.m_gravity.y;
+            this.b2dObject.m_gravity.y = 0;
+        } else if(this.b2dObject.m_gravity.y == 0 && this.b2dObject.m_gravity.x < 0){
+            this.b2dObject.m_gravity.y = this.b2dObject.m_gravity.x;
+            this.b2dObject.m_gravity.x = 0;
+        } else if(this.b2dObject.m_gravity.x == 0 && this.b2dObject.m_gravity.y < 0){
+            this.b2dObject.m_gravity.x = -1 * this.b2dObject.m_gravity.y;
+            this.b2dObject.m_gravity.y = 0;
+        } else if(this.b2dObject.m_gravity.y == 0 && this.b2dObject.m_gravity.x > 0){
+            this.b2dObject.m_gravity.y = this.b2dObject.m_gravity.x;
+            this.b2dObject.m_gravity.x = 0;
+        }
+        for(var key in this.dinamicObjects){
+            this.dinamicObjects[key].b2dObject.SetAwake(true);
+        }
+    },
+
+    /**
+     * Changes the gravity randomly
+     * @return {undefined} Nothing returned
+     */
+    changeRandomGravity: function() {
         var random = Math.random();
         if(random < 0.33){
             if(this.b2dObject.m_gravity.x == 0){

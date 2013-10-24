@@ -222,15 +222,17 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.infoLayer.appendChild(Lbl.Start);
         this.infoLayer.appendChild(Lbl.Menu);
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
-            e.event.stopPropagation()
+            e.event.stopPropagation();
         });
-        goog.events.listen(Lbl.Start, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Start, ['mousedown', 'touchend'], function(e){
+            e.event.stopPropagation();
             ungravity.World.resume();
         });
         goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Levels(ungravity.World.episode), lime.transitions.Dissolve);
         });
-        goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(e){
+            e.event.stopPropagation();
             ungravity.World.resume();
         });
         this.appendChild(this.infoLayer);
@@ -269,10 +271,12 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Levels(ungravity.World.episode), lime.transitions.Dissolve);
         });
-        goog.events.listen(Lbl.Close, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Close, ['mousedown', 'touchend'], function(e){
+            e.event.stopPropagation();
             ungravity.World.resume();
         });
-        goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(e){
+            e.event.stopPropagation();
             ungravity.World.resume();
         });
         this.appendChild(this.infoLayer);
@@ -311,10 +315,12 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
             e.event.stopPropagation()
         });
-        goog.events.listen(Lbl.Close, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Lbl.Close, ['mousedown', 'touchend'], function(e){
+            e.event.stopPropagation();
             ungravity.World.resume();
         });
-        goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(){
+        goog.events.listen(Spt.Close, ['mousedown', 'touchend'], function(e){
+            e.event.stopPropagation();
             ungravity.World.resume();
         });
         goog.events.listen(Lbl.Menu, ['mousedown', 'touchend'], function(){
@@ -359,7 +365,7 @@ goog.object.extend(ungravity.scenes.Play.prototype, {
         this.infoLayer.appendChild(Lbl.Menu);
         this.infoLayer.appendChild(Lbl.OK);
         goog.events.listen(this.infoLayer, ['mousedown', 'touchend'], function(e){
-            e.event.stopPropagation()
+            e.event.stopPropagation();
         });
         goog.events.listen(Lbl.Replay, ['mousedown', 'touchend'], function(){
             ungravity.director.replaceScene(new ungravity.scenes.Play(ungravity.World.getLevelName()), lime.transitions.Dissolve);
