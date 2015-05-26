@@ -1,4 +1,2 @@
-ungravity
-=========
-
-An HTML5 game made with LimeJS, Google Closure and Box2d
+# expedicion-argentina
+A HTML5 educational game made with Phaser.js
